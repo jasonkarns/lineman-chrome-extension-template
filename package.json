@@ -2,16 +2,14 @@
   "name": "your-chrome-extension-name-here",
   "version": "0.0.1",
   "description": "A description of your awesome Chrome extension",
-
   "private": true,
-
   "author": "John Doe <jdoe@example.com> (http://example.com/jdoe)",
-
   "engines": {
     "node": "*"
   },
-
   "devDependencies": {
-    "lineman": ">=0.14.5"
+    "lineman": ">=0.14.5",
+    "grunt": "~0.4.1",
+    "grunt-contrib-copy": "~0.4.1"
   }
 }
