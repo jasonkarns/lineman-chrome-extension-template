@@ -6,11 +6,12 @@ config =
 
   appTasks:
     common: [ "copy" ]
-    dev: [ "watch" ]
+    dev: [ "exec", "watch" ]
     dist: []
 
   loadNpmTasks: [
     "grunt-contrib-copy"
+    "grunt-exec"
   ]
 
   clean:
@@ -28,10 +29,15 @@ config =
           lineman.grunt.template.process content,
             data: config
 
+  exec:
+    # Install 'Extensions Reloader': let's Lineman trigger a reload of unpacked extensions
+    # https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid
+    reloadExtension:
+      cmd: "open -g -a 'Google Chrome' http://reload.extensions"
 
   watch:
     manifest:
       files: "<%= copy.manifest.src %>"
-      tasks: [ "copy:manifest" ]
+      tasks: [ "copy:manifest", "exec" ]
 
 module.exports = config
