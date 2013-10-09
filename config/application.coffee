@@ -6,7 +6,7 @@ config =
 
   appTasks:
     common: [ "copy" ]
-    dev: []
+    dev: [ "watch" ]
     dist: []
 
   loadNpmTasks: [
@@ -27,5 +27,11 @@ config =
         processContent: (content, srcpath) ->
           lineman.grunt.template.process content,
             data: config
+
+
+  watch:
+    manifest:
+      files: "<%= copy.manifest.src %>"
+      tasks: [ "copy:manifest" ]
 
 module.exports = config
