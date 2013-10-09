@@ -8,3 +8,9 @@ module.exports =
 
   loadNpmTasks: [
   ]
+
+  clean:
+    dev:
+      src: "generated"
+    dist:
+      src: "dist"
