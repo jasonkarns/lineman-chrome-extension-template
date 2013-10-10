@@ -17,10 +17,15 @@ config =
   clean:
     dev:
       src: "generated"
+
     dist:
       src: "dist"
 
   concat:
+    backgroundCss:
+      src: [ "<%= files.background.css.vendor %>", "<%= files.background.css.app %>" ]
+      dest: "generated/<%= files.background.css.concatenated %>"
+
     backgroundJs:
       src: [ "<%= files.background.js.vendor %>", "<%= files.background.js.app %>" ]
       dest: "generated/<%= files.background.js.concatenated %>"
@@ -44,6 +49,10 @@ config =
     manifest:
       files: "<%= copy.manifest.src %>"
       tasks: [ "copy:manifest", "exec" ]
+
+    concatBackgroundCss:
+      files: [ "<%= files.background.css.vendor %>", "<%= files.background.css.app %>" ]
+      tasks: [ "concat:backgroundCss", "exec" ]
 
     concatBackgroundJs:
       files: [ "<%= files.background.js.vendor %>", "<%= files.background.js.app %>" ]
