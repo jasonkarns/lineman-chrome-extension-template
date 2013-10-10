@@ -46,6 +46,20 @@ config =
       cmd: "open -g -a 'Google Chrome' http://reload.extensions"
 
   jshint:
+    options:
+      # enforcing options
+      curly: true
+      eqeqeq: true
+      latedef: true
+      newcap: true
+      noarg: true
+      # relaxing options
+      boss: true
+      eqnull: true
+      sub: true
+      # globals
+      browser: true
+
     background:
       src: "<%= files.background.js.app %>"
 
