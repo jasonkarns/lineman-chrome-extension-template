@@ -4,9 +4,10 @@
   "version": "<%= pkg.version %>",
   "description": "<%= pkg.description %>",
 
+  // http://developer.chrome.com/extensions/background_pages.html
   "background": {
-    "scripts": [
-      "<%= files.background.js.concatenated %>"
-    ]
+    // Use only 'scripts' or 'page', not both:
+    // "page": "<%= files.background.pages.generated %>"
+    "scripts": [ "<%= files.background.js.concatenated %>" ]
   }
 }
