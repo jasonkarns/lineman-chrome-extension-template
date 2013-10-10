@@ -15,3 +15,7 @@ module.exports =
       app: "background/css/**/*.css"
       vendor: "vendor/background/css/**/*.css"
       concatenated: "<%= pkg.name %>_background.css"
+
+    pages:
+      source: "background/background.*"
+      generated: "background.html"
