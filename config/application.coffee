@@ -5,7 +5,7 @@ config =
   pkg: lineman.grunt.file.readJSON("package.json")
 
   appTasks:
-    common: [ "concat", "copy", "pages" ]
+    common: [ "jshint", "concat", "copy", "pages" ]
     dev: [ "exec", "watch" ]
     dist: []
 
@@ -45,6 +45,10 @@ config =
     reloadExtension:
       cmd: "open -g -a 'Google Chrome' http://reload.extensions"
 
+  jshint:
+    background:
+      src: "<%= files.background.js.app %>"
+
   pages:
     background:
       src: "<%= files.background.pages.source %>"
@@ -65,6 +69,10 @@ config =
     concatBackgroundJs:
       files: [ "<%= files.background.js.vendor %>", "<%= files.background.js.app %>" ]
       tasks: [ "concat:backgroundJs", "exec" ]
+
+    jshintBackground:
+      files: "<%= files.background.js.app %>"
+      tasks: "jshint:background"
 
     pagesBackground:
       files: "<%= files.background.pages.source %>"
