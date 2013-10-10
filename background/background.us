@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= pkg.name %> Background</title>
+    <link rel="stylesheet" href="<%= css %>"/>
+    <script src="<%= js %>"></script>
+  </head>
+</html>
