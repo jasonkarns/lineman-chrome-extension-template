@@ -5,7 +5,7 @@ config =
   pkg: lineman.grunt.file.readJSON("package.json")
 
   appTasks:
-    common: [ "copy" ]
+    common: [ "concat", "copy" ]
     dev: [ "exec", "watch" ]
     dist: []
 
@@ -19,6 +19,11 @@ config =
       src: "generated"
     dist:
       src: "dist"
+
+  concat:
+    backgroundJs:
+      src: [ "<%= files.background.js.vendor %>", "<%= files.background.js.app %>" ]
+      dest: "generated/<%= files.background.js.concatenated %>"
 
   copy:
     manifest:
@@ -39,5 +44,9 @@ config =
     manifest:
       files: "<%= copy.manifest.src %>"
       tasks: [ "copy:manifest", "exec" ]
+
+    concatBackgroundJs:
+      files: [ "<%= files.background.js.vendor %>", "<%= files.background.js.app %>" ]
+      tasks: [ "concat:backgroundJs", "exec" ]
 
 module.exports = config
