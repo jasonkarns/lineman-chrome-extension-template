@@ -5,7 +5,7 @@ config =
   pkg: lineman.grunt.file.readJSON("package.json")
 
   appTasks:
-    common: [ "jshint", "concat", "copy", "pages" ]
+    common: [ "coffee", "jshint", "concat", "copy", "pages" ]
     dev: [ "exec", "watch" ]
     dist: []
 
@@ -21,13 +21,18 @@ config =
     dist:
       src: "dist"
 
+  coffee:
+    background:
+      src: "<%= files.background.coffee.app %>"
+      dest: "generated/<%= files.background.coffee.generated %>"
+
   concat:
     backgroundCss:
       src: [ "<%= files.background.css.vendor %>", "<%= files.background.css.app %>" ]
       dest: "generated/<%= files.background.css.concatenated %>"
 
     backgroundJs:
-      src: [ "<%= files.background.js.vendor %>", "<%= files.background.js.app %>" ]
+      src: [ "<%= files.background.js.vendor %>", "generated/<%= files.background.coffee.generated %>", "<%= files.background.js.app %>" ]
       dest: "generated/<%= files.background.js.concatenated %>"
 
   copy:
@@ -76,12 +81,16 @@ config =
       files: "<%= copy.manifest.src %>"
       tasks: [ "copy:manifest", "exec" ]
 
+    coffeeBackground:
+      files: "<%= coffee.background.src %>"
+      tasks: [ "coffee:background", "concat:backgroundJs", "exec" ]
+
     concatBackgroundCss:
       files: [ "<%= files.background.css.vendor %>", "<%= files.background.css.app %>" ]
       tasks: [ "concat:backgroundCss", "exec" ]
 
     concatBackgroundJs:
-      files: [ "<%= files.background.js.vendor %>", "<%= files.background.js.app %>" ]
+      files: [ "<%= files.background.js.vendor %>", "generated/<%= files.background.coffee.generated %>", "<%= files.background.js.app %>" ]
       tasks: [ "concat:backgroundJs", "exec" ]
 
     jshintBackground:

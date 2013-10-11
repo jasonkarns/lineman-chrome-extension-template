@@ -11,6 +11,10 @@ module.exports =
       vendor: "vendor/background/js/**/*.js"
       concatenated: "<%= pkg.name %>_background.js"
 
+    coffee:
+      app: "background/js/**/*.coffee"
+      generated: "background.coffee.js"
+
     css:
       app: "background/css/**/*.css"
       vendor: "vendor/background/css/**/*.css"
