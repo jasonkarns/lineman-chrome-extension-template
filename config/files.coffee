@@ -20,6 +20,12 @@ module.exports =
       vendor: "vendor/background/css/**/*.css"
       concatenated: "<%= pkg.name %>_background.css"
 
+    less:
+      app: "background/css/**/*.less"
+      vendor: "vendor/background/css/**/*.less"
+      generatedApp: "background.less.css"
+      generatedVendor: "background.vendor.less.css"
+
     pages:
       source: "background/background.*"
       generated: "background.html"

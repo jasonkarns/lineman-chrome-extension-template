@@ -5,7 +5,7 @@ config =
   pkg: lineman.grunt.file.readJSON("package.json")
 
   appTasks:
-    common: [ "coffee", "jshint", "concat", "copy", "pages" ]
+    common: [ "coffee", "less", "jshint", "concat", "copy", "pages" ]
     dev: [ "exec", "watch" ]
     dist: []
 
@@ -28,7 +28,12 @@ config =
 
   concat:
     backgroundCss:
-      src: [ "<%= files.background.css.vendor %>", "<%= files.background.css.app %>" ]
+      src: [
+        "generated/<%= files.background.less.generatedVendor %>"
+        "<%= files.background.css.vendor %>"
+        "generated/<%= files.background.less.generatedApp %>"
+        "<%= files.background.css.app %>"
+      ]
       dest: "generated/<%= files.background.css.concatenated %>"
 
     backgroundJs:
@@ -68,6 +73,12 @@ config =
     background:
       src: "<%= files.background.js.app %>"
 
+  less:
+    background:
+      files:
+        "generated/<%= files.background.less.generatedApp %>": "<%= files.background.less.app %>"
+        "generated/<%= files.background.less.generatedVendor %>": "<%= files.background.less.vendor %>"
+
   pages:
     background:
       src: "<%= files.background.pages.source %>"
@@ -86,7 +97,7 @@ config =
       tasks: [ "coffee:background", "concat:backgroundJs", "exec" ]
 
     concatBackgroundCss:
-      files: [ "<%= files.background.css.vendor %>", "<%= files.background.css.app %>" ]
+      files: [ "generated/<%= files.background.less.generatedVendor %>", "<%= files.background.css.vendor %>", "generated/<%= files.background.less.generatedApp %>", "<%= files.background.css.app %>" ]
       tasks: [ "concat:backgroundCss", "exec" ]
 
     concatBackgroundJs:
@@ -96,6 +107,10 @@ config =
     jshintBackground:
       files: "<%= files.background.js.app %>"
       tasks: "jshint:background"
+
+    lessBackground:
+      files: [ "<%= files.background.less.app %>", "<%= files.background.less.vendor %>" ]
+      tasks: [ "less:background", "concat:backgroundCss", "exec" ]
 
     pagesBackground:
       files: "<%= files.background.pages.source %>"
