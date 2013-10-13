@@ -79,6 +79,12 @@ config =
       src: "<%= files.background.js.app %>"
 
   jst:
+    options:
+      processName: (filename) ->
+        filename
+          .replace(/^(?:.*?\/){2}/, '') # kill top two directories (extension page template dir)
+          .replace(/\.[^.]*$/, '') # kill file extension
+
     background:
       src: "<%= files.background.template.underscore %>"
       dest: "generated/<%= files.background.template.generatedUnderscore %>"
