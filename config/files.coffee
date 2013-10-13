@@ -29,3 +29,10 @@ module.exports =
     pages:
       source: "background/background.*"
       generated: "background.html"
+
+    template:
+      underscore: [ "background/templates/**/*.underscore", "background/templates/**/*.us" ]
+      generatedUnderscore: "background.underscore.js"
+      generated: [
+        "generated/<%= files.background.template.generatedUnderscore %>"
+      ]

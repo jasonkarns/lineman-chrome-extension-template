@@ -5,7 +5,7 @@ config =
   pkg: lineman.grunt.file.readJSON("package.json")
 
   appTasks:
-    common: [ "coffee", "less", "jshint", "concat", "copy", "pages" ]
+    common: [ "coffee", "less", "jshint", "jst", "concat", "copy", "pages" ]
     dev: [ "exec", "watch" ]
     dist: []
 
@@ -37,7 +37,12 @@ config =
       dest: "generated/<%= files.background.css.concatenated %>"
 
     backgroundJs:
-      src: [ "<%= files.background.js.vendor %>", "generated/<%= files.background.coffee.generated %>", "<%= files.background.js.app %>" ]
+      src: [
+        "<%= files.background.js.vendor %>"
+        "<%= files.background.template.generated %>"
+        "generated/<%= files.background.coffee.generated %>"
+        "<%= files.background.js.app %>"
+      ]
       dest: "generated/<%= files.background.js.concatenated %>"
 
   copy:
@@ -73,6 +78,11 @@ config =
     background:
       src: "<%= files.background.js.app %>"
 
+  jst:
+    background:
+      src: "<%= files.background.template.underscore %>"
+      dest: "generated/<%= files.background.template.generatedUnderscore %>"
+
   less:
     background:
       files:
@@ -101,7 +111,7 @@ config =
       tasks: [ "concat:backgroundCss", "exec" ]
 
     concatBackgroundJs:
-      files: [ "<%= files.background.js.vendor %>", "generated/<%= files.background.coffee.generated %>", "<%= files.background.js.app %>" ]
+      files: [ "<%= files.background.js.vendor %>", "<%= files.background.template.generated %>", "generated/<%= files.background.coffee.generated %>", "<%= files.background.js.app %>" ]
       tasks: [ "concat:backgroundJs", "exec" ]
 
     jshintBackground:
@@ -115,5 +125,9 @@ config =
     pagesBackground:
       files: "<%= files.background.pages.source %>"
       tasks: [ "pages:background", "exec" ]
+
+    underscoreBackground:
+      files: "<%= files.background.template.underscore %>"
+      tasks: [ "jst:background", "concat:backgroundJs", "exec" ]
 
 module.exports = config
