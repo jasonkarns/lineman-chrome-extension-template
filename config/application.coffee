@@ -62,6 +62,11 @@ config =
 
   # requires handlebars-runtime at runtime
   handlebars:
+    options:
+      processName: (filename) ->
+        filename
+          .replace(/^(?:.*?\/){2}/, '') # kill top two directories (extension page template dir)
+          .replace(/\.[^.]*$/, '') # kill file extension
     background:
       src: "<%= files.background.template.handlebars %>"
       dest: "generated/<%= files.background.template.generatedHandlebars %>"
