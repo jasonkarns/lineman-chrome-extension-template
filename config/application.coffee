@@ -5,7 +5,7 @@ config =
   pkg: lineman.grunt.file.readJSON("package.json")
 
   appTasks:
-    common: [ "coffee", "less", "jshint", "jst", "concat", "copy", "pages" ]
+    common: [ "coffee", "less", "jshint", "handlebars", "jst", "concat", "copy", "pages" ]
     dev: [ "exec", "watch" ]
     dist: []
 
@@ -60,6 +60,12 @@ config =
     reloadExtension:
       cmd: "open -g -a 'Google Chrome' http://reload.extensions"
 
+  # requires handlebars-runtime at runtime
+  handlebars:
+    background:
+      src: "<%= files.background.template.handlebars %>"
+      dest: "generated/<%= files.background.template.generatedHandlebars %>"
+
   jshint:
     options:
       # enforcing options
@@ -78,6 +84,7 @@ config =
     background:
       src: "<%= files.background.js.app %>"
 
+  # requires underscore or lodash at runtime
   jst:
     options:
       processName: (filename) ->
@@ -119,6 +126,10 @@ config =
     concatBackgroundJs:
       files: [ "<%= files.background.js.vendor %>", "<%= files.background.template.generated %>", "generated/<%= files.background.coffee.generated %>", "<%= files.background.js.app %>" ]
       tasks: [ "concat:backgroundJs", "exec" ]
+
+    handlebarsBackground:
+      files: "<%= files.background.template.handlebars %>"
+      tasks: [ "handlebars:background", "concat:backgroundJs", "exec" ]
 
     jshintBackground:
       files: "<%= files.background.js.app %>"

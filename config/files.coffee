@@ -31,8 +31,18 @@ module.exports =
       generated: "background.html"
 
     template:
-      underscore: [ "background/templates/**/*.underscore", "background/templates/**/*.us" ]
+      handlebars: [
+        "background/templates/**/*.handlebar"
+        "background/templates/**/*.handlebars"
+        "background/templates/**/*.hb"
+      ]
+      underscore: [
+        "background/templates/**/*.underscore"
+        "background/templates/**/*.us"
+      ]
+      generatedHandlebars: "background.handlebars.js"
       generatedUnderscore: "background.underscore.js"
       generated: [
+        "generated/<%= files.background.template.generatedHandlebars %>"
         "generated/<%= files.background.template.generatedUnderscore %>"
       ]
