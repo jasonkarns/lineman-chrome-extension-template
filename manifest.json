@@ -4,6 +4,9 @@
   "version": "<%= pkg.version %>",
   "description": "<%= pkg.description %>",
 
+  "browser_action": {
+  },
+
   // http://developer.chrome.com/extensions/background_pages.html
   "background": {
     // Use only 'scripts' or 'page', not both:
