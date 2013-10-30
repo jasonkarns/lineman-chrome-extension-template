@@ -5,7 +5,7 @@ config =
   pkg: lineman.grunt.file.readJSON("package.json")
 
   appTasks:
-    common: [ "coffee", "less", "jshint", "handlebars", "jst", "concat", "copy", "pages" ]
+    common: [ "coffee", "less", "jshint", "handlebars", "jst", "concat", "copy", "images", "pages" ]
     dev: [ "exec", "watch" ]
     dist: []
 
@@ -70,6 +70,13 @@ config =
     background:
       src: "<%= files.background.template.handlebars %>"
       dest: "generated/<%= files.background.template.generatedHandlebars %>"
+
+  images:
+    background:
+      files: [
+        { expand: true, cwd: "vendor/background/", src: "img/**/*.*", dest: "generated/" }
+        { expand: true, cwd: "background/",        src: "img/**/*.*", dest: "generated/" }
+      ]
 
   jshint:
     options:
