@@ -143,6 +143,10 @@ config =
       files: "<%= files.background.template.handlebars %>"
       tasks: [ "handlebars:background", "concat:backgroundJs", "exec" ]
 
+    imagesBackground:
+      files: [ "vendor/background/img/**/*.*", "background/img/**/*.*" ]
+      tasks: [ "images:background", "exec" ]
+
     jshintBackground:
       files: "<%= files.background.js.app %>"
       tasks: "jshint:background"
