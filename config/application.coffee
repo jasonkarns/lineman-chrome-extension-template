@@ -5,7 +5,7 @@ config =
   pkg: lineman.grunt.file.readJSON("package.json")
 
   appTasks:
-    common: [ "coffee", "less", "jshint", "handlebars", "jst", "concat", "copy", "images", "pages" ]
+    common: [ "coffee", "less", "jshint", "handlebars", "jst", "concat", "copy", "images", "webfonts", "pages" ]
     dev: [ "exec", "watch" ]
     dist: []
 
@@ -122,6 +122,13 @@ config =
         js: "<%= files.background.js.concatenated %>"
         css: "<%= files.background.css.concatenated %>"
 
+  webfonts:
+    background:
+      files: [
+        { expand: true, cwd: "vendor/background/", src: "webfonts/**/*.*", dest: "generated/" }
+        { expand: true, cwd: "background/",        src: "webfonts/**/*.*", dest: "generated/" }
+      ]
+
   watch:
     manifest:
       files: "<%= copy.manifest.src %>"
@@ -162,5 +169,9 @@ config =
     underscoreBackground:
       files: "<%= files.background.template.underscore %>"
       tasks: [ "jst:background", "concat:backgroundJs", "exec" ]
+
+    webfontsBackground:
+      files: [ "vendor/background/webfonts/**/*.*" ]
+      tasks: [ "webfonts:background", "exec" ]
 
 module.exports = config
