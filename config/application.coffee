@@ -5,7 +5,7 @@ config =
   pkg: lineman.grunt.file.readJSON("package.json")
 
   appTasks:
-    common: [ "coffee", "less", "jshint", "handlebars", "jst", "concat", "copy", "images", "webfonts", "pages" ]
+    common: [ "coffee", "less", "jshint", "handlebars", "jst", "concat", "copy:manifest", "images", "webfonts", "pages" ]
     dev: [ "exec", "watch" ]
     dist: []
 
