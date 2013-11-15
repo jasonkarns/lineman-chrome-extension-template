@@ -1,17 +1,19 @@
 lineman = require(process.env["LINEMAN_MAIN"])
+manifestSchema = require('chrome-extension-manifest-schema')
 
 # completely ignore Lineman's built-in application config
 config =
   pkg: lineman.grunt.file.readJSON("package.json")
 
   appTasks:
-    common: [ "coffee", "less", "jshint", "handlebars", "jst", "concat", "copy:manifest", "images", "webfonts", "pages" ]
+    common: [ "coffee", "less", "jshint", "handlebars", "jst", "concat", "copy:manifest", "tv4:manifest", "images", "webfonts", "pages" ]
     dev: [ "exec", "watch" ]
     dist: []
 
   loadNpmTasks: [
     "grunt-contrib-copy"
     "grunt-exec"
+    "grunt-tv4"
   ]
 
   clean:
@@ -121,6 +123,13 @@ config =
       context:
         js: "<%= files.background.js.concatenated %>"
         css: "<%= files.background.css.concatenated %>"
+
+  tv4:
+    manifest:
+      src: "generated/<%= files.manifest.generated %>"
+      options:
+        multi: true
+        root: manifestSchema
 
   webfonts:
     background:
