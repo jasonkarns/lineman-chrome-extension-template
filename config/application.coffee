@@ -6,13 +6,14 @@ config =
   pkg: lineman.grunt.file.readJSON("package.json")
 
   appTasks:
-    common: [ "coffee", "less", "jshint", "handlebars", "jst", "concat", "copy:manifest", "tv4:manifest", "images", "webfonts", "pages" ]
+    common: [ "coffee", "less", "jshint", "handlebars", "jst", "concat", "copy:manifest", "minjson:manifest", "tv4:manifest", "images", "webfonts", "pages" ]
     dev: [ "exec", "watch" ]
     dist: []
 
   loadNpmTasks: [
     "grunt-contrib-copy"
     "grunt-exec"
+    "grunt-minjson"
     "grunt-tv4"
   ]
 
@@ -115,6 +116,11 @@ config =
       files:
         "generated/<%= files.background.less.generatedApp %>": "<%= files.background.less.app %>"
         "generated/<%= files.background.less.generatedVendor %>": "<%= files.background.less.vendor %>"
+
+  minjson:
+    manifest:
+      src:  "generated/<%= files.manifest.generated %>"
+      dest: "generated/<%= files.manifest.generated %>"
 
   pages:
     background:
