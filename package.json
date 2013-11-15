@@ -9,7 +9,6 @@
   },
   "devDependencies": {
     "lineman": ">=0.15.0",
-    "grunt": "~0.4.1",
     "grunt-exec": "~0.4.2",
     "chrome-extension-manifest-schema": "~0.0.1",
     "grunt-tv4": "Bartvds/grunt-tv4"
